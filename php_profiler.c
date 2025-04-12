@@ -292,7 +292,7 @@ void profiler_execute(zend_op_array *execute_data TSRMLS_DC)
 		profile->location.file = zend_get_executed_filename();
 		profile->location.line = line;
 		profile->call.function = get_active_function_name();
-		profile->call.scope = (EG(called_scope)) ? EG(called_scope)->name->val : "";
+		profile->call.scope = (EG(fake_scope)) ? EG(fake_scope)->name->val : "";
 
 		if (PROF_G(memory))
 			profile->call.memory = zend_memory_usage(0);
@@ -315,7 +315,7 @@ void profiler_execute(zend_op_array *execute_data TSRMLS_DC)
 		profile->location.file = zend_get_executed_filename(TSRMLS_C);
 		profile->location.line = line;
 		profile->call.function = get_active_function_name(TSRMLS_C);
-		profile->call.scope = (EG(called_scope)) ? EG(called_scope)->name : "";
+		profile->call.scope = (EG(fake_scope)) ? EG(fake_scope)->name : "";
 
 		if (PROF_G(memory))
 			profile->call.memory = zend_memory_usage(0 TSRMLS_CC);
@@ -350,7 +350,7 @@ void profiler_execute_internal(zend_execute_data *execute_data_ptr, int return_v
 		profile->location.file = zend_get_executed_filename();
 		profile->location.line = line;
 		profile->call.function = get_active_function_name();
-		profile->call.scope = (EG(called_scope)) ? EG(called_scope)->name->val : "";
+		profile->call.scope = (EG(fake_scope)) ? EG(fake_scope)->name->val : "";
 
 		if (PROF_G(memory))
 			profile->call.memory = zend_memory_usage(0);
@@ -373,7 +373,7 @@ void profiler_execute_internal(zend_execute_data *execute_data_ptr, int return_v
 		profile->location.file = zend_get_executed_filename(TSRMLS_C);
 		profile->location.line = line;
 		profile->call.function = get_active_function_name(TSRMLS_C);
-		profile->call.scope = (EG(called_scope)) ? EG(called_scope)->name : "";
+		profile->call.scope = (EG(fake_scope)) ? EG(fake_scope)->name : "";
 
 		if (PROF_G(memory))
 			profile->call.memory = zend_memory_usage(0 TSRMLS_CC);
@@ -390,4 +390,3 @@ void profiler_execute_internal(zend_execute_data *execute_data_ptr, int return_v
 	}
 #endif
 }
- 
